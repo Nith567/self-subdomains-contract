@@ -1,167 +1,63 @@
-"use client";
-
-import React, { useState, useEffect, useMemo } from "react";
-import { useRouter } from "next/navigation";
-import { countries, getUniversalLink } from "@selfxyz/core";
-import {
-  SelfQRcodeWrapper,
-  SelfAppBuilder,
-  type SelfApp,
-} from "@selfxyz/qrcode";
-import { ethers } from "ethers";
-
 export default function Home() {
-  const router = useRouter();
-  const [linkCopied, setLinkCopied] = useState(false);
-  const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState("");
-  const [selfApp, setSelfApp] = useState<SelfApp | null>(null);
-  const [universalLink, setUniversalLink] = useState("");
-  const [userId] = useState("0x8A0d290b2EE35eFde47810CA8fF057e109e4190B");
-  const excludedCountries = useMemo(() => [countries.UNITED_STATES], []);
-
-
-
-  // in this take the params of the page.tsx pass his privay wallet to the userID , SO THAT WE CAN extract
-  // Use useEffect to ensure code only executes on the client side
-  useEffect(() => {
-    try {
-      const app = new SelfAppBuilder({
-        version: 2,
-        appName: process.env.NEXT_PUBLIC_SELF_APP_NAME || "Self Workshop",
-        scope: process.env.NEXT_PUBLIC_SELF_SCOPE || "self-workshop",
-        endpoint: `${process.env.NEXT_PUBLIC_SELF_ENDPOINT}`,
-        chainID: 11142220, // Celo Sepolia
-        logoBase64:
-          "https://i.postimg.cc/mrmVf9hm/self.png", // url of a png image, base64 is accepted but not recommended
-        userId: userId,
-        endpointType: "staging_celo",
-        userIdType: "hex", // use 'hex' for ethereum address or 'uuid' for uuidv4
-        userDefinedData: "Hello Eth Delhi!!!",
-        disclosures: {
-        // what you want to verify from users' identity
-          minimumAge:18,
-          // ofac: true,
-          excludedCountries: excludedCountries,
-
-        // what you want users to reveal
-          // name: false,
-          // issuing_state: true,
-          nationality: true,
-          // date_of_birth: true,
-          // passport_number: false,
-          gender: true,
-          // expiry_date: false,
-        }
-      }).build();
-
-      setSelfApp(app);
-      setUniversalLink(getUniversalLink(app as any)); // Type assertion to handle package version mismatch
-    } catch (error) {
-      console.error("Failed to initialize Self app:", error);
-    }
-  }, [excludedCountries, userId]);
-
-  const displayToast = (message: string) => {
-    setToastMessage(message);
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000);
-  };
-
-  const copyToClipboard = () => {
-    if (!universalLink) return;
-
-    navigator.clipboard
-      .writeText(universalLink)
-      .then(() => {
-        setLinkCopied(true);
-        displayToast("Universal link copied to clipboard!");
-        setTimeout(() => setLinkCopied(false), 2000);
-      })
-      .catch((err) => {
-        console.error("Failed to copy text: ", err);
-        displayToast("Failed to copy link");
-      });
-  };
-
-  const openSelfApp = () => {
-    if (!universalLink) return;
-
-    window.open(universalLink, "_blank");
-    displayToast("Opening Self App...");
-  };
-
-  const handleSuccessfulVerification = () => {
-    displayToast("Verification successful! Redirecting...");
-    setTimeout(() => {
-      router.push("/verified");
-    }, 1500);
-  };
-
   return (
-    <div className="min-h-screen w-full bg-gray-50 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
-      {/* Header */}
-      <div className="mb-6 md:mb-8 text-center">
-        <h1 className="text-2xl sm:text-3xl font-bold mb-2 text-gray-800">
-          {process.env.NEXT_PUBLIC_SELF_APP_NAME || "Self Workshop"}
-        </h1>
-        <p className="text-sm sm:text-base text-gray-600 px-2">
-          Scan QR code with Self Protocol App to verify your identity
-        </p>
-      </div>
-
-      {/* Main content */}
-      <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto">
-        <div className="flex justify-center mb-4 sm:mb-6">
-          {selfApp ? (
-            <SelfQRcodeWrapper
-              selfApp={selfApp}
-              onSuccess={handleSuccessfulVerification}
-              onError={() => {
-                displayToast("Error: Failed to verify identity");
-              }}
-            />
-          ) : (
-            <div className="w-[256px] h-[256px] bg-gray-200 animate-pulse flex items-center justify-center">
-              <p className="text-gray-500 text-sm">Loading QR Code...</p>
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
+      <div className="max-w-md w-full">
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 shadow-2xl p-8 text-center">
+          {/* Logo/Icon */}
+          <div className="mb-6">
+            <div className="w-20 h-20 mx-auto bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full flex items-center justify-center">
+              <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
             </div>
-          )}
-        </div>
+          </div>
 
-        <div className="flex flex-col sm:flex-row gap-2 sm:space-x-2 mb-4 sm:mb-6">
-          <button
-            type="button"
-            onClick={copyToClipboard}
-            disabled={!universalLink}
-            className="flex-1 bg-gray-800 hover:bg-gray-700 transition-colors text-white p-2 rounded-md text-sm sm:text-base disabled:bg-gray-400 disabled:cursor-not-allowed"
-          >
-            {linkCopied ? "Copied!" : "Copy Universal Link"}
-          </button>
+          {/* Title */}
+          <h1 className="text-3xl font-bold text-white mb-4">
+            CryptoNomads
+          </h1>
 
-          <button
-            type="button"
-            onClick={openSelfApp}
-            disabled={!universalLink}
-            className="flex-1 bg-blue-600 hover:bg-blue-500 transition-colors text-white p-2 rounded-md text-sm sm:text-base mt-2 sm:mt-0 disabled:bg-blue-300 disabled:cursor-not-allowed"
-          >
-            Open Self App
-          </button>
+          {/* Description */}
+          <p className="text-white/80 text-lg mb-6">
+            Decentralized Identity Verification
+          </p>
 
+          {/* Features */}
+          <div className="space-y-3 mb-8">
+            <div className="flex items-center justify-center text-white/70">
+              <svg className="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Self Protocol Integration
+            </div>
+            <div className="flex items-center justify-center text-white/70">
+              <svg className="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Age & Identity Verification
+            </div>
+            <div className="flex items-center justify-center text-white/70">
+              <svg className="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Discord Integration
+            </div>
+          </div>
 
-        </div>
-        <div className="flex flex-col items-center gap-2 mt-2">
-          <span className="text-gray-500 text-xs uppercase tracking-wide">User Address</span>
-          <div className="bg-gray-100 rounded-md px-3 py-2 w-full text-center break-all text-sm font-mono text-gray-800 border border-gray-200">
-            {userId ? userId : <span className="text-gray-400">Not connected</span>}
+          {/* Status */}
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-green-500/20 border border-green-400/30">
+            <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+            <span className="text-green-300 text-sm font-medium">Live on Celo Mainnet</span>
+          </div>
+
+          {/* Contract Address */}
+          <div className="mt-6 p-3 bg-black/20 rounded-lg">
+            <p className="text-white/60 text-xs mb-1">Contract Address:</p>
+            <code className="text-cyan-300 text-xs font-mono break-all">
+              0xaE2f2f748e6bEc92D70882cfc425e2425a0f1a92
+            </code>
           </div>
         </div>
-
-        {/* Toast notification */}
-        {showToast && (
-          <div className="fixed bottom-4 right-4 bg-gray-800 text-white py-2 px-4 rounded shadow-lg animate-fade-in text-sm">
-            {toastMessage}
-          </div>
-        )}
       </div>
     </div>
   );
