@@ -11,14 +11,14 @@ const RAW_RUNTIME_STATE =
   ],\
   "dependencyTreeRoots": [\
     {\
-      "name": "self-workshop",\
+      "name": "crypto-nomads",\
       "reference": "workspace:."\
     }\
   ],\
   "enableTopLevelFallback": true,\
   "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
   "fallbackExclusionList": [\
-    ["self-workshop", ["workspace:."]]\
+    ["crypto-nomads", ["workspace:."]]\
   ],\
   "fallbackPool": [\
   ],\
@@ -7129,11 +7129,11 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["self-workshop", [\
+    ["crypto-nomads", [\
       ["workspace:.", {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["self-workshop", "workspace:."],\
+          ["crypto-nomads", "workspace:."],\
           ["@emotion/react", "virtual:fdcaf85e688c72cee637b9342f3024df2e9e12c2cc9aab89f0e2427584d8bb9c41c4df16800923f48909e01755ad3216264718e3b866b047ad93651be0059775#npm:11.14.0"],\
           ["@emotion/styled", "virtual:fdcaf85e688c72cee637b9342f3024df2e9e12c2cc9aab89f0e2427584d8bb9c41c4df16800923f48909e01755ad3216264718e3b866b047ad93651be0059775#npm:11.14.1"],\
           ["@eslint/eslintrc", "npm:3.3.1"],\

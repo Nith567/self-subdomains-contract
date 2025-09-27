@@ -50,7 +50,7 @@ PRIVATE_KEY=0xyour_private_key_here
 NETWORK=celo-sepolia
 
 # Scope calculation
-SCOPE_SEED="self-workshop"
+SCOPE_SEED="crypto-nomads"
 ```
 
 Deploy the contract:
@@ -85,7 +85,7 @@ NEXT_PUBLIC_SELF_ENDPOINT=0xYourContractAddress
 
 # App configuration
 NEXT_PUBLIC_SELF_APP_NAME="Self Workshop"
-NEXT_PUBLIC_SELF_SCOPE="self-workshop"
+NEXT_PUBLIC_SELF_SCOPE="crypto-nomads"
 ```
 
 ### Step 4: Start Development
@@ -116,7 +116,7 @@ const selfApp = new SelfAppBuilder({
     userIdType: "hex",             // For wallet addresses
     version: 2,                    // Always use V2
     appName: "Self Workshop",
-    scope: "self-workshop",
+    scope: "crypto-nomads",
     userId: userWalletAddress,
 
     disclosures: {

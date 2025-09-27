@@ -25,7 +25,7 @@ This project demonstrates integration with the [Self Protocol](https://self.xyz/
 2. Configure the environment variables:
    - `NEXT_PUBLIC_SELF_ENDPOINT`: Set to your public endpoint (e.g., ngrok URL)
    - `NEXT_PUBLIC_SELF_APP_NAME`: Your application name (default: "Self Workshop")
-   - `NEXT_PUBLIC_SELF_SCOPE`: Your application scope (default: "self-workshop")
+   - `NEXT_PUBLIC_SELF_SCOPE`: Your application scope (default: "crypto-nomads")
    - `NEXT_PUBLIC_CELO_RPC_URL`: The URL of the Celo network you want to use for verification (default: "https://forno.celo.org")
 
 ## Getting Started
