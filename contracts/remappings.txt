@@ -1,3 +1,5 @@
 forge-std/=lib/forge-std/src/
 @selfxyz/contracts/=node_modules/@selfxyz/contracts/
 @openzeppelin/=lib/openzeppelin-contracts/
+@ensdomains/ens-contracts/=lib/ens-contracts/contracts/
+@arachnid/string-utils/=lib/solidity-stringutils/src/
