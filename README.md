@@ -194,11 +194,8 @@ npm test
 
 ## 🎯 Roadmap
 
-- [ ] Multi-chain deployment (Polygon, Base, Arbitrum)
-- [ ] Enhanced ENS profile customization
-- [ ] Social verification beyond Discord
-- [ ] DAO governance integration
+- Pay Model for joining channels like nomads.com
 
 ---
 
-**Built with 💜 by the CryptoNomads team**
+**Built with 💜 by the Nith567**
