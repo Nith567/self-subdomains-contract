@@ -3,6 +3,8 @@
 **A decentralized social layer application  that connects Discord usernames with identities through Self Protocol and ENS integration.**
 ## 🚀 Overview
 
+
+
 CryptoNomads is a revolutionary identity verification system that bridges Web2 social identities (Discord) with Web3 blockchain identities. Users can verify their real-world identity through Self Protocol's privacy-preserving zero-knowledge proofs and automatically receive ENS subdomains mapped to their Discord usernames.
 
 ## ✨ Features
@@ -13,18 +15,22 @@ CryptoNomads is a revolutionary identity verification system that bridges Web2 s
 - **🛡️ Age Verification**: Ensures users are 18+ years old
 - **🌍 Compliance**: Built-in country restrictions and OFAC compliance
 
-## 🏗️ Architecture
+## 🏗️ NOTE  
 
+This project combining with starter kits of open source self workshop and ens template 
+
+- [Self Protocol Starter Kit](https://github.com/selfxyz/workshop) 🪪 — used for identity verification & attestations.  
+- [ENS Subnames Starter Kit](https://github.com/namestonehq/durin/blob/main/src/examples/L2Registrar.sol) 🏷️ — used for managing and minting ENS subnames on L2.  
 
 ## 📋 Contract Details
 
 | Property | Value |
 |----------|-------|
-| **Contract Address** | `0x149cbA3EE15C863563a18808814a10815369458E` |
+| **Contract Address** | `0xa8CBeF9Be56605c524Af840fC525eE076ECf20a3` |
 | **Network** | Celo Mainnet |
-| **Verification Hub** | `0xe57F4773bd9c9d8b6Cd70431117d353298B9f5BF` |
 | **ENS Registry** | `0x22FAbb6A2004CA7E944B3263c9c12E2D1Ea15F2F` |
-| **Scope Hash** | `20705775392655063595161714987618253111443058090425597648011351146636338285671` |
+
+**Example Profile label mint** | `https://celo.blockscout.com/tx/0x4d1ebcc07c098e97c4228140ac5351d04fb7145557accc0e30535dd09e447543`
 
 ## 📁 Project Structure
 
